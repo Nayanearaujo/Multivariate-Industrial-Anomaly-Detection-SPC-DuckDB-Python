@@ -1,0 +1,19 @@
+project:
+  name: Chemical Process Performance Analytics
+  source_doi: 10.7910/DVN/6C3JR1
+  sample_interval_minutes: 3
+  public_language: English
+
+monitoring:
+  alarm_persistence_samples: 3
+  statistical_alpha: 0.01
+  minimum_normal_run_coverage: 0.99
+
+palette:
+  midnight_navy: "#14213D"
+  industrial_teal: "#2A9D8F"
+  guava: "#F08FA0"
+  warm_sand: "#F6F1EC"
+  amber: "#E9C46A"
+  steel: "#607A80"
+
