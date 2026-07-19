@@ -63,6 +63,19 @@ These are monitoring and decision-support metrics. The source does not contain p
 7. Threshold, persistence and workload scenarios
 8. Executive findings and control plan
 
+## Current validated evidence
+
+The normal-operation foundation is complete and reproducible:
+
+- 730,000 samples across 1,000 simulation runs;
+- 52 expected process signals;
+- 100% complete training and testing run sequences;
+- no missing signal cells, non-finite values or duplicate composite keys;
+- an independent normal-testing split retained for false-alarm evaluation;
+- the largest testing-versus-training median shift is approximately 0.019 training IQR.
+
+Read the detailed audit in [Notebook 02 — Data Quality and Operating Baseline](notebooks/02_data_quality_and_operating_baseline.ipynb).
+
 ## Repository structure
 
 ```text
@@ -95,5 +108,4 @@ The project follows DMAIC without presenting simulated improvement as a real pla
 
 ## Status
 
-**Phase 1 — Project foundation and source validation.** No analytical conclusion is reported until the source files are downloaded, validated and processed reproducibly.
-
+**Phase 2 — Normal operating baseline validated.** Statistical process control and fault-file ingestion are the next active workstreams.

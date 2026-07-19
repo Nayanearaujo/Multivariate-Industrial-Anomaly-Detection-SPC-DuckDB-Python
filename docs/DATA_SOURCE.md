@@ -23,6 +23,17 @@ Each published data frame contains 55 columns:
 
 Training runs contain 500 samples and testing runs contain 960 samples. The source documentation states that faults are introduced after an initial normal operating period. The exact onset rule will be validated against the downloaded metadata before KPI calculations are finalised.
 
+## Normal-operation validation completed
+
+The two complete fault-free files were ingested and reconciled independently:
+
+| Split | Rows | Runs | Samples per run | Sequence completion |
+| --- | ---: | ---: | ---: | ---: |
+| Normal training | 250,000 | 500 | 500 | 100% |
+| Normal testing | 480,000 | 500 | 960 | 100% |
+
+Across the combined 730,000 normal-operation samples, the audit found no missing signal cells, non-finite values, duplicate composite keys, missing sequence steps, unexpected fault labels or zero-variance signals. The checks and interpretation are documented in `notebooks/02_data_quality_and_operating_baseline.ipynb`.
+
 ## Use policy
 
 - Download files directly from Harvard Dataverse.
@@ -35,4 +46,3 @@ Training runs contain 500 samples and testing runs contain 960 samples. The sour
 ## Important limitation
 
 This is simulated process data. It is appropriate for method development and portfolio demonstration, but it does not prove performance in an operating plant. The dashboard will label the source as simulation data in every public-facing view.
-
