@@ -14,7 +14,7 @@ Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stac
 
 ---
 
-### 📊 [CLIQUE AQUI PARA ACESSAR O DASHBOARD INTERATIVO](https://github.com/Nayanearaujo/chemical-process-performance-analytics)
+### 📊 [CLIQUE AQUI PARA ACESSAR O DASHBOARD INTERATIVO](https://github.com/Nayanearaujo/industrial-anomaly-analytics)
 
 ![Dashboard Executivo - Industrial Anomaly Analytics](images/powerbi_executive_overview.png)
 
@@ -95,7 +95,7 @@ O projeto é estruturado utilizando a metodologia DMAIC de melhoria contínua:
 
 ## Estrutura do Repositório
 ```text
-chemical-process-performance-analytics/
+industrial-anomaly-analytics/
 ├── config/                  # Paletas visuais e configurações
 ├── data/                    # Dados locais (raw, interim e processed)
 ├── docs/                    # Especificação de KPIs, dicionário e charter
@@ -133,8 +133,8 @@ docker compose up jupyter
 ### Opção B: Execução Local (Python)
 
 ```bash
-git clone https://github.com/Nayanearaujo/chemical-process-performance-analytics.git
-cd chemical-process-performance-analytics
+git clone https://github.com/Nayanearaujo/industrial-anomaly-analytics.git
+cd industrial-anomaly-analytics
 pip install -r requirements.txt
 
 # Download do dataset
