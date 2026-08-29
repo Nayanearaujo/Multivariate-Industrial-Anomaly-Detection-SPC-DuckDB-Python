@@ -1,0 +1,26 @@
+services:
+  analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: industrial-anomaly-analytics
+    volumes:
+      - ./data:/app/data
+      - ./images:/app/images
+      - ./notebooks:/app/notebooks
+    environment:
+      - PYTHONPATH=/app/src
+    command: python scripts/generate_powerbi_tables.py
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: industrial-analytics-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app/src
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
