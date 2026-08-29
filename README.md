@@ -1,6 +1,6 @@
-# Industrial Anomaly Analytics: Detecção Estatística Multivariada com DuckDB e Python
+# Industrial Anomaly Analytics
 
-**Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
+**Do Sinal do Sensor ao Controle Estatístico de Processo (SPC)**
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
 [![DuckDB](https://img.shields.io/badge/DuckDB-0.10-orange?logo=duckdb)](https://duckdb.org/)
