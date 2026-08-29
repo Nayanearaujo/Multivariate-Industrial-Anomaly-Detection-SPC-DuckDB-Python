@@ -1,6 +1,13 @@
-# Chemical Process Performance Analytics: Do Sinal do Sensor ao Controle de Processo
+# Sensor-to-Decision SPC: Detecção de Falhas e Analytics de Processos Industriais
 
 **Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
+[![DuckDB](https://img.shields.io/badge/DuckDB-0.10-orange?logo=duckdb)](https://duckdb.org/)
+[![SQL](https://img.shields.io/badge/SQL-DuckDB-blue)](https://duckdb.org/)
+[![Power_BI](https://img.shields.io/badge/Power_BI-Executive-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
+[![Parquet](https://img.shields.io/badge/Parquet-Data_Lake-blue)](https://parquet.apache.org/)
+[![Pytest](https://img.shields.io/badge/Pytest-Integrity_Checks-green?logo=pytest)](https://docs.pytest.org/)
 
 Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stack de **Python, SQL e Power BI**. O escopo cobre desde a auditoria da base de dados física (*raw signals*), validação da consistência estatística da operação normal, detecção de anomalias por modelos multivariados (SPC), até a modelagem dimensional de KPIs e o design de um plano de controle contínuo baseado em DMAIC.
 
