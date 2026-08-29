@@ -1,4 +1,4 @@
-# 2 - [Industrial Anomaly Analytics: Detecção Estatística Multivariada com DuckDB e Python](https://multivariate-industrial-anomaly-detection-spc-duckdb-python-4m.streamlit.app/)
+## [Industrial Anomaly Analytics: Detecção Estatística Multivariada com DuckDB e Python](https://multivariate-industrial-anomaly-detection-spc-duckdb-python-4m.streamlit.app/)
 
 **Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
 
@@ -22,6 +22,8 @@ Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stac
 
 ### 2. Aplicação Interativa Streamlit (Visão Operacional & Simulações)
 ![Aplicação Interativa Streamlit](images/streamlit_app_preview.png)
+
+https://multivariate-industrial-anomaly-detection-spc-duckdb-python-4m.streamlit.app/
 
 > **🚀 Experimente a Aplicação Interativa Web (`app.py`):**
 > O web app oferece exploração interativa dos 52 sinais de processo com gráficos Plotly, simulador multivariado de SPC ($T^2$ e $Q$), injeção de falhas com regra de persistência e dicionário completo de instrumentação.
