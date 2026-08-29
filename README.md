@@ -5,31 +5,41 @@
 [![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
 [![DuckDB](https://img.shields.io/badge/DuckDB-0.10-orange?logo=duckdb)](https://duckdb.org/)
 [![SQL](https://img.shields.io/badge/SQL-DuckDB-blue)](https://duckdb.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Interactive_App-FF4B4B?logo=streamlit&logoColor=white)](https://github.com/Nayanearaujo/Industrial-Anomaly-Analytics-Detec-o-Estat-stica-Multivariada-com-DuckDB-e-Python)
 [![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Power_BI](https://img.shields.io/badge/Power_BI-Executive-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
 [![Parquet](https://img.shields.io/badge/Parquet-Data_Lake-blue)](https://parquet.apache.org/)
 [![Pytest](https://img.shields.io/badge/Pytest-Integrity_Checks-green?logo=pytest)](https://docs.pytest.org/)
 
-Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stack de **Python, SQL, Docker e Power BI**. O escopo cobre desde a auditoria da base de dados física (*raw signals*), validação da consistência estatística da operação normal, detecção de anomalias por modelos multivariados (SPC), até a modelagem dimensional de KPIs e o design de um plano de controle contínuo baseado em DMAIC.
+Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stack de **Python, SQL, Docker, Streamlit e Power BI**. O escopo cobre desde a auditoria da base de dados física (*raw signals*), validação da consistência estatística da operação normal, detecção de anomalias por modelos multivariados (SPC), até a modelagem dimensional de KPIs e o design de um plano de controle contínuo baseado em DMAIC.
 
 ---
 
-### 📊 [CLIQUE AQUI PARA ACESSAR O DASHBOARD INTERATIVO](https://github.com/Nayanearaujo/industrial-anomaly-analytics)
+### 📊 Dashboard Executivo Power BI & Aplicação Interativa Streamlit
 
 ![Dashboard Executivo - Industrial Anomaly Analytics](images/powerbi_executive_overview.png)
+
+> **🚀 Experimente a Aplicação Interativa Web (Streamlit):**
+> O projeto inclui um web app completo (`app.py`) com explorador interativo de sensores, simulador multivariado de SPC ($T^2$ e $Q$) e injeção de falhas com regras de persistência.
+> ```bash
+> # Rodar o app interativo localmente
+> streamlit run app.py
+> 
+> # Ou iniciar via container Docker
+> docker compose up streamlit
+> ```
 
 ---
 
 ## 🛠️ Tech Stack e Habilidades
 Este repositório é um case de **Analytics Engineering & Industrial Data Science** focado em confiabilidade e integridade de dados operacionais:
 
-- **Python (Pandas, NumPy, Plotly):** Pipelines de ETL para conversão de grandes volumes de séries temporais (formato RData para Parquet), análise exploratória multivariada e modelagem SPC.
+- **Python (Pandas, NumPy, Plotly, Scikit-Learn):** Pipelines de ETL para conversão de séries temporais para Parquet, análise multivariada e modelagem SPC via PCA.
+- **Streamlit:** Aplicação analítica interativa com simulador de limites de controle, injeção de falhas e gráficos dinâmicos em Plotly.
 - **SQL (DuckDB):** Modelagem e criação de views de KPIs analíticos para consumo no Power BI.
 - **Docker & Docker Compose:** Containerização do ambiente completo para execução isolada e reprodutibilidade com um único comando.
 - **Estatística Industrial:** Monitoramento multivariado via $T^2$ de Hotelling, resíduos $Q$ (SPE) e regras de persistência de alarme.
-- **Business Intelligence (Power BI & Power Query):** Modelagem dimensional star schema, desenvolvimento de medidas em DAX para acompanhamento de faturamento/alarme e design de interface executiva.
-
-> O projeto contendo o modelo estatístico está disponível no repositório. Cada KPI apresentado foi reconciliado com a base higienizada para garantir 100% de integridade dos dados de processo.
+- **Business Intelligence (Power BI & Power Query):** Modelagem dimensional star schema, desenvolvimento de medidas em DAX para acompanhamento operacional e design de interface executiva.
 
 ## Status do Projeto (Milestones)
 
@@ -40,10 +50,10 @@ Este repositório é um case de **Analytics Engineering & Industrial Data Scienc
 | Higienização e Auditoria de Qualidade | Completo |
 | Validação Estatística de Operação Estável | Completo |
 | Containerização com Docker & Docker Compose | Completo |
-| Modelagem de Controle Estatístico de Processo (SPC) | Planejado |
-| Ingestão e Injeção de Falhas | Planejado |
+| Modelagem de Controle Estatístico de Processo (SPC) | Completo |
+| Aplicação Web Interativa (Streamlit App) | Completo |
+| Ingestão e Diagnóstico de Falhas (Fase 3) | Em Andamento |
 | Comparação de Modelos de Detecção | Planejado |
-| Dashboards de Monitoramento e Controle (Power BI) | Planejado |
 
 ## Raio-X do Processo (Resultados de Base)
 A base analítica foi validada e auditada, fornecendo a base histórica necessária para o estabelecimento de limites de controle estatístico confiáveis.
@@ -71,7 +81,7 @@ flowchart TD
     B --> C[Construção da Linha de Base Estável]
     C --> D[Modelagem SPC - Hotelling T² e Q]
     D --> E[Isolamento de Causa Raiz - Gráficos de Contribuição]
-    E --> F[Dashboard de Controle Operacional]
+    E --> F[Dashboard Streamlit e Power BI]
 ```
 
 ## Validação e Higienização de Dados
@@ -80,18 +90,13 @@ A consistência dos dados históricos é crítica para o controle estatístico. 
 - **Valores Nulos e Infinitos:** Varredura em todas as 52 colunas físicas para assegurar a inexistência de leituras falhas.
 - **Comparação de Splits:** Teste estatístico de Kolmogorov-Smirnov para garantir que a partição de teste tem a mesma distribuição da partição de treino (limite de deslocamento máximo de 0,019 IQR respeitado).
 
-## Insights Críticos de Engenharia de Processo
-- **Divisão de Normalidade:** Um conjunto independente de testes normais foi mantido exclusivamente para calibrar a taxa de alarmes falsos sob condições não vistas.
-- **Variáveis de Processo vs Manipuladas:** Das 52 variáveis, 41 representam sensores diretos de processo (temperaturas, pressões, níveis, composições) e 11 representam as posições de válvulas de controle (manipuladas).
-- **Ausência de Dados Financeiros:** A simulação foca puramente em física e controle de processos. Métricas financeiras como economia de matéria-prima ou OEE não serão geradas devido à ausência dessas informações na fonte.
-
 ## Arquitetura de Monitoramento (DMAIC)
 O projeto é estruturado utilizando a metodologia DMAIC de melhoria contínua:
 - **Define:** Mapeamento de problemas operacionais como atrasos de detecção e sobrecarga de alarmes falsos.
 - **Measure:** Criação da linha de base de operação normal estável.
 - **Analyse:** Identificação das falhas mais críticas e das variáveis físicas correlacionadas com cada desvio.
 - **Improve:** Ajuste fino dos limites estatísticos e das regras de persistência (ex: 3 alarmes consecutivos para validar um desvio).
-- **Control:** Publicação de views em SQL, dicionários de KPIs e painéis de resposta operacional para a sala de controle.
+- **Control:** Publicação de views em SQL, dicionários de KPIs, web app em Streamlit e painéis de resposta operacional para a sala de controle.
 
 ## Estrutura do Repositório
 ```text
@@ -100,14 +105,15 @@ industrial-anomaly-analytics/
 ├── data/                    # Dados locais (raw, interim e processed)
 ├── docs/                    # Especificação de KPIs, dicionário e charter
 ├── images/                  # Gráficos exportados para documentação
-├── notebooks/               # Análise exploratória e notebooks do leitor
+├── notebooks/               # Roteiro de notebooks executáveis (01 a 03)
 ├── powerbi/                 # Arquivo de modelo e layout de dashboard
-├── scripts/                 # Scripts Python de download e pipelines
+├── scripts/                 # Scripts Python de download, ETL e dimensões
 ├── sql/                     # Banco DuckDB e views de KPIs
 ├── src/                     # Módulos Python reutilizáveis
 ├── tests/                   # Testes unitários e de integridade
+├── app.py                   # Aplicação interativa Web (Streamlit)
 ├── Dockerfile               # Imagem Docker para execução reprodutível
-└── docker-compose.yml       # Orquestração do pipeline analítico e Jupyter
+└── docker-compose.yml       # Orquestração analítica, Streamlit e Jupyter
 ```
 
 ## Roteiro de Análise (Notebook Roadmap)
@@ -116,26 +122,33 @@ industrial-anomaly-analytics/
 |---|---|---|
 | `01` | [01_data_source_and_process_context.ipynb](notebooks/01_data_source_and_process_context.ipynb) | Contextualização do processo químico, definição de variáveis e download. |
 | `02` | [02_data_quality_and_operating_baseline.ipynb](notebooks/02_data_quality_and_operating_baseline.ipynb) | Auditoria de integridade física dos dados e validação do baseline estável. |
+| `03` | [03_multivariate_statistical_process_control.ipynb](notebooks/03_multivariate_statistical_process_control.ipynb) | Modelagem SPC via PCA, cálculo de $T^2$ de Hotelling e resíduos $Q$. |
 
 ## Como Reproduzir o Projeto
 
 ### Opção A: Execução Containerizada com Docker (Recomendado)
 
-Construa a imagem e execute o pipeline de dados automaticamente:
+Construa as imagens e execute os serviços containerizados:
 ```bash
-# Gerar as tabelas dimensionais e métricas no container
-docker compose up analytics --build
+# Iniciar o dashboard interativo Streamlit na porta 8501
+docker compose up streamlit --build
 
-# Iniciar o ambiente JupyterLab containerizado (porta 8888)
+# Iniciar o ambiente JupyterLab na porta 8888
 docker compose up jupyter
+
+# Gerar as tabelas dimensionais Parquet
+docker compose up analytics
 ```
 
 ### Opção B: Execução Local (Python)
 
 ```bash
-git clone https://github.com/Nayanearaujo/industrial-anomaly-analytics.git
-cd industrial-anomaly-analytics
+git clone https://github.com/Nayanearaujo/Industrial-Anomaly-Analytics-Detec-o-Estat-stica-Multivariada-com-DuckDB-e-Python.git
+cd Industrial-Anomaly-Analytics-Detec-o-Estat-stica-Multivariada-com-DuckDB-e-Python
 pip install -r requirements.txt
+
+# Executar a aplicação Streamlit
+streamlit run app.py
 
 # Download do dataset
 python scripts/download_data.py
@@ -145,7 +158,7 @@ python scripts/prepare_normal_baseline.py
 ```
 
 ## Ferramentas Utilizadas
-Python · Pandas · NumPy · Plotly · DuckDB · SQL · Docker · Parquet · Jupyter · Pytest · Power BI · GitHub
+Python · Streamlit · Pandas · NumPy · Plotly · Scikit-Learn · DuckDB · SQL · Docker · Parquet · Jupyter · Pytest · Power BI · GitHub
 
 ## Fonte e Licença
 - **Dataset:** Tennessee Eastman Process Simulation Data (Harvard Dataverse, DOI: [10.7910/DVN/6C3JR1](https://doi.org/10.7910/DVN/6C3JR1)).
