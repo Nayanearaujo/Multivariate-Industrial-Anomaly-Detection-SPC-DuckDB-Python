@@ -1,11 +1,11 @@
-# Industrial Anomaly Analytics: Detecção Estatística Multivariada com DuckDB e Python
+# [Detecção de Anomalias em Processos Industriais](https://github.com/Nayanearaujo/Industrial-Process-Anomaly-Detection-Multivariate-SPC-DuckDB-Python)
 
 **Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
 [![DuckDB](https://img.shields.io/badge/DuckDB-0.10-orange?logo=duckdb)](https://duckdb.org/)
 [![SQL](https://img.shields.io/badge/SQL-DuckDB-blue)](https://duckdb.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Interactive_App-FF4B4B?logo=streamlit&logoColor=white)](https://github.com/Nayanearaujo/Industrial-Anomaly-Analytics-Detec-o-Estat-stica-Multivariada-com-DuckDB-e-Python)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Interactive_App-FF4B4B?logo=streamlit&logoColor=white)](https://github.com/Nayanearaujo/Industrial-Process-Anomaly-Detection-Multivariate-SPC-DuckDB-Python)
 [![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Power_BI](https://img.shields.io/badge/Power_BI-Executive-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
 [![Parquet](https://img.shields.io/badge/Parquet-Data_Lake-blue)](https://parquet.apache.org/)
@@ -104,7 +104,7 @@ O projeto é estruturado utilizando a metodologia DMAIC de melhoria contínua:
 
 ## Estrutura do Repositório
 ```text
-industrial-anomaly-analytics/
+Industrial-Process-Anomaly-Detection-Multivariate-SPC-DuckDB-Python/
 ├── config/                  # Paletas visuais e configurações
 ├── data/                    # Dados locais (raw, interim e processed)
 ├── docs/                    # Especificação de KPIs, dicionário e charter
@@ -147,8 +147,8 @@ docker compose up analytics
 ### Opção B: Execução Local (Python)
 
 ```bash
-git clone https://github.com/Nayanearaujo/Industrial-Anomaly-Analytics-Detec-o-Estat-stica-Multivariada-com-DuckDB-e-Python.git
-cd Industrial-Anomaly-Analytics-Detec-o-Estat-stica-Multivariada-com-DuckDB-e-Python
+git clone https://github.com/Nayanearaujo/Industrial-Process-Anomaly-Detection-Multivariate-SPC-DuckDB-Python.git
+cd Industrial-Process-Anomaly-Detection-Multivariate-SPC-DuckDB-Python
 pip install -r requirements.txt
 
 # Executar a aplicação Streamlit
