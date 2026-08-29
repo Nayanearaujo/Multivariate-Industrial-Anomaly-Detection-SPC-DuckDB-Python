@@ -1,4 +1,4 @@
-# [🔗 Detecção de Anomalias Industriais — Aplicação Interativa](https://multivariate-industrial-anomaly-detection-spc-duckdb-python-4m.streamlit.app/)
+# 2 - [Industrial Anomaly Analytics: Detecção Estatística Multivariada com DuckDB e Python](https://multivariate-industrial-anomaly-detection-spc-duckdb-python-4m.streamlit.app/)
 
 **Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
 
