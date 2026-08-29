@@ -15,6 +15,8 @@ Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stac
 
 ### 📊 [CLIQUE AQUI PARA ACESSAR O DASHBOARD INTERATIVO](https://github.com/Nayanearaujo/chemical-process-performance-analytics)
 
+![Dashboard Executivo - Industrial Anomaly Analytics](images/powerbi_executive_overview.png)
+
 ---
 
 ## 🛠️ Tech Stack e Habilidades
