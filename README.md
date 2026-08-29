@@ -1,111 +1,116 @@
 # Chemical Process Performance Analytics
 
-An industrial analytics project connecting chemical engineering, process performance, statistical process control, continuous improvement and business intelligence.
+An industrial analytics project connecting chemical engineering, process performance, statistical process control, continuous improvement, and business intelligence.
 
-The project uses the **Tennessee Eastman Process** simulation dataset published through Harvard Dataverse. It studies how a multivariate chemical process moves from stable operation to abnormal behaviour, how quickly faults can be detected and which process variables should receive operational attention.
+The project uses the **Tennessee Eastman Process** simulation dataset published through Harvard Dataverse to study how a multivariate chemical process moves from stable operation to abnormal behaviour, how quickly faults can be detected, and which process variables require operational attention.
 
-## Business question
+## Objectives
 
-How can an operations team monitor process stability, detect abnormal conditions early and prioritise improvement work without creating an excessive false-alarm burden?
+The goal is to answer a core operational question: **How can an operations team monitor process stability, detect abnormal conditions early, and prioritise improvement work without creating an excessive false-alarm burden?**
 
-## Why this project matters
+To achieve this, the project connects raw process signals to operational decisions by:
+1. Defining statistical normal operating envelopes.
+2. Measuring detection speed (delay) and false-alarm frequency.
+3. Structuring consistent performance comparisons across different fault types and operating runs.
+4. Mapping which process measurements drive specific anomaly alerts.
+5. Providing structured inputs for a practical monitoring and control dashboard.
 
-Industrial performance is not only a modelling problem. A useful solution must connect process signals to operating decisions:
+## Technology Stack
 
-- identify when the process leaves its normal operating envelope;
-- measure detection speed and false alarms;
-- compare fault types and operating runs consistently;
-- explain which measurements contribute most to an alert;
-- translate findings into a practical monitoring and control plan.
+* **Language/Processing:** Python, Pandas, NumPy, scikit-learn
+* **Database & SQL:** DuckDB, Parquet
+* **Visualization & Reporting:** Power BI, Power Query, Plotly, Jupyter Notebooks
 
-## Project scope
-
-| Workstream | Deliverable |
-| --- | --- |
-| Process understanding | Process map, variable dictionary and operating assumptions |
-| Data engineering | Reproducible download, validation and Parquet preparation |
-| Python analysis | Jupyter notebooks for quality, stability, fault patterns and root-cause evidence |
-| SQL | DuckDB model and reusable KPI views |
-| Statistical process control | Baseline limits, Hotelling T², Q residuals and alarm persistence |
-| Machine learning | Interpretable fault-detection baselines and temporal validation |
-| Business intelligence | Power BI monitoring model, dashboard specification and curated extracts |
-| Continuous improvement | DMAIC-based prioritisation and control plan |
-
-## Public data source
-
-- **Dataset:** Additional Tennessee Eastman Process Simulation Data for Anomaly Detection Evaluation
-- **Publisher:** Harvard Dataverse
-- **DOI:** [10.7910/DVN/6C3JR1](https://doi.org/10.7910/DVN/6C3JR1)
-- **Source type:** simulated multivariate chemical-process time series
-- **Coverage:** normal operation and 20 process-fault scenarios
-- **Structure:** 41 measured variables, 11 manipulated variables, simulation run, sample and fault number
-
-The repository does not redistribute the raw source files. Run the download script to obtain them directly from the publisher.
-
-## Decision-focused KPIs
-
-1. **Fault Detection Rate** — percentage of eligible faulty runs in which the monitoring rule raises a confirmed alert.
-2. **Median Detection Delay** — median minutes between fault introduction and the first confirmed alert.
-3. **False Alarm Rate** — percentage of eligible normal samples that trigger a confirmed alert.
-4. **Process Stability Rate** — percentage of eligible samples that remain inside the statistical operating envelope.
-5. **Alarm Burden** — confirmed alert events per 100 operating hours.
-
-These are monitoring and decision-support metrics. The source does not contain production volume, scheduled time, good units or cost data, so this project will not present OEE, yield, MTBF, MTTR or financial savings as observed results.
-
-## Planned analysis path
-
-1. Data source and process context
-2. Data quality and operating baseline
-3. Statistical process control
-4. Fault pattern and Pareto analysis
-5. Detection model comparison
-6. Root-cause evidence and variable contribution
-7. Threshold, persistence and workload scenarios
-8. Executive findings and control plan
-
-## Current validated evidence
-
-The normal-operation foundation is complete and reproducible:
-
-- 730,000 samples across 1,000 simulation runs;
-- 52 expected process signals;
-- 100% complete training and testing run sequences;
-- no missing signal cells, non-finite values or duplicate composite keys;
-- an independent normal-testing split retained for false-alarm evaluation;
-- the largest testing-versus-training median shift is approximately 0.019 training IQR.
-
-Read the detailed audit in [Notebook 02 — Data Quality and Operating Baseline](notebooks/02_data_quality_and_operating_baseline.ipynb).
-
-## Repository structure
+## Repository Structure
 
 ```text
 chemical-process-performance-analytics/
-├── config/                  # Project settings and visual palette
-├── data/                    # Local raw, interim and processed data
-├── docs/                    # Source, KPI, dashboard and project documentation
-├── images/                  # Exported analytical figures
-├── notebooks/               # Reader-facing Jupyter analysis
-├── powerbi/                 # Model and dashboard handoff files
-├── scripts/                 # Download and notebook build utilities
-├── sql/                     # DuckDB schema and reusable KPI views
-├── src/                     # Reusable Python modules
-└── tests/                   # Metric and transformation checks
+├── config/                  # Visual palettes and configurations
+├── data/                    # Raw, interim, and processed datasets
+├── docs/                    # Dashboards, KPIs, and project specifications
+├── images/                  # Exported plots and analytics charts
+├── notebooks/               # Step-by-step Jupyter notebooks
+├── powerbi/                 # Power BI files and data models
+├── scripts/                 # Download, processing, and build utilities
+├── sql/                     # DuckDB database schema and KPI views
+├── src/                     # Shared Python library modules
+└── tests/                   # Code and metric integrity checks
 ```
 
-## Technology
+## Data Source
 
-Python · Pandas · NumPy · scikit-learn · Plotly · Jupyter · SQL · DuckDB · Parquet · Power BI · Power Query · GitHub
+* **Dataset:** Additional Tennessee Eastman Process Simulation Data for Anomaly Detection Evaluation
+* **Publisher:** Harvard Dataverse
+* **DOI:** [10.7910/DVN/6C3JR1](https://doi.org/10.7910/DVN/6C3JR1)
+* **Format:** Multivariate time series representing normal operation and 20 distinct process-fault scenarios.
+* **Signals:** 41 measured variables, 11 manipulated variables, plus simulation metadata (run, sample, fault number).
 
-## Continuous-improvement frame
+*Note: Raw source files are not tracked in this repository. Follow the setup steps below to download them directly from the source.*
 
-The project follows DMAIC without presenting simulated improvement as a real plant result:
+## How to Reproduce
 
-- **Define:** delayed detection and excessive alarms as the operating problem;
-- **Measure:** establish stable-operation and alerting baselines;
-- **Analyse:** identify difficult faults and the variables driving abnormal behaviour;
-- **Improve:** compare monitoring thresholds and persistence rules;
-- **Control:** publish KPI definitions, SQL views, dashboard monitoring and response guidance.
+### 1. Environment Setup
+Clone the repository and install the dependencies:
+```bash
+git clone https://github.com/Nayanearaujo/chemical-process-performance-analytics.git
+cd chemical-process-performance-analytics
+pip install -r requirements.txt
+```
 
-## Status
+### 2. Download Raw Data
+Download the Tennessee Eastman datasets from Harvard Dataverse:
+```bash
+python scripts/download_data.py
+```
+This script downloads the raw `.RData` files into `data/raw/` and generates `source_manifest.json` with checksums for verification.
 
-**Phase 2 — Normal operating baseline validated.** Statistical process control and fault-file ingestion are the next active workstreams.
+### 3. Build the Normal-Operation Baseline
+Run the preprocessing script to clean, validate, and prepare the normal-operation baseline:
+```bash
+python scripts/prepare_normal_baseline.py
+```
+This exports processed `.parquet` files and updates the baseline audit in `data/processed/normal_baseline_audit.json`.
+
+---
+
+## Decision-Focused KPIs
+
+The project evaluates performance using five operational metrics:
+
+1. **Fault Detection Rate (FDR):** Percentage of eligible faulty runs that trigger a confirmed alert.
+2. **Median Detection Delay:** Median time (in minutes) from fault onset to the first confirmed alert.
+3. **False Alarm Rate (FAR):** Percentage of normal-operation samples that trigger a false alert.
+4. **Process Stability Rate:** Percentage of samples that remain within the defined statistical envelope.
+5. **Alarm Burden:** Count of confirmed alerts per 100 operating hours.
+
+*Note: Because the Tennessee Eastman simulation does not model production volumes, costs, or repair events, this project does not track financial savings, yield, OEE, MTTR, or MTBF.*
+
+## Development & Analysis Path
+
+1. **Context & Setup:** Data source mapping and process boundaries.
+2. **Data Quality & Baseline:** Validating training/testing datasets.
+3. **Statistical Process Control:** Defining Hotelling $T^2$ and Q-residual thresholds.
+4. **Pattern Analysis:** Pareto charts of faults and alarm occurrences.
+5. **Model Evaluation:** Performance comparison of detection methods.
+6. **Root Cause Analysis:** Contribution plots to isolate driving variables.
+7. **Operational Tuning:** Sensitivity analysis on alert persistence rules.
+8. **Control Plan:** Control charts, SQL views, and dashboard specifications.
+
+## Current Project Status
+
+**Phase 2 - Baseline Validated**
+* Loaded and verified 730,000 samples across 1,000 simulation runs.
+* Confirmed 52 process signals with 0 missing, non-finite, or duplicated keys.
+* Established the normal-testing partition for false-alarm testing.
+* Validated that the maximum training-to-testing median shift is minimal (approx. 0.019 IQR).
+
+You can review the full data audit in [Notebook 02 - Data Quality and Operating Baseline](notebooks/02_data_quality_and_operating_baseline.ipynb).
+
+## Continuous Improvement (DMAIC) Framework
+
+The analysis steps are structured using the DMAIC method:
+* **Define:** Scope detection delays and false alerts as the core problem.
+* **Measure:** Establish base metrics under stable operating conditions.
+* **Analyse:** Identify difficult-to-detect faults and pinpoint variables driving deviation.
+* **Improve:** Evaluate alarm persistence filters to balance sensitivity and workload.
+* **Control:** Provide KPI views, SQL scripts, and Power BI specifications for production monitoring.
