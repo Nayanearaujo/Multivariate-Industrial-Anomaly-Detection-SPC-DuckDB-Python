@@ -1,4 +1,4 @@
-# [Detecção de Anomalias em Processos Industriais](https://github.com/Nayanearaujo/Industrial-Process-Anomaly-Detection-Multivariate-SPC-DuckDB-Python)
+# [🔗 Detecção de Anomalias Industriais — Aplicação Interativa](https://multivariate-industrial-anomaly-detection-spc-duckdb-python-4m.streamlit.app/)
 
 **Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
 
