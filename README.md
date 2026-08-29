@@ -1,4 +1,4 @@
-# Sensor-to-Decision SPC: Detecção de Falhas e Analytics de Processos Industriais
+# Industrial Anomaly Analytics: Detecção Estatística Multivariada com DuckDB e Python
 
 **Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
 
