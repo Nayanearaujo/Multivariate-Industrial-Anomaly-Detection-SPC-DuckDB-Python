@@ -5,11 +5,12 @@
 [![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
 [![DuckDB](https://img.shields.io/badge/DuckDB-0.10-orange?logo=duckdb)](https://duckdb.org/)
 [![SQL](https://img.shields.io/badge/SQL-DuckDB-blue)](https://duckdb.org/)
+[![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Power_BI](https://img.shields.io/badge/Power_BI-Executive-yellow?logo=powerbi)](https://powerbi.microsoft.com/)
 [![Parquet](https://img.shields.io/badge/Parquet-Data_Lake-blue)](https://parquet.apache.org/)
 [![Pytest](https://img.shields.io/badge/Pytest-Integrity_Checks-green?logo=pytest)](https://docs.pytest.org/)
 
-Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stack de **Python, SQL e Power BI**. O escopo cobre desde a auditoria da base de dados física (*raw signals*), validação da consistência estatística da operação normal, detecção de anomalias por modelos multivariados (SPC), até a modelagem dimensional de KPIs e o design de um plano de controle contínuo baseado em DMAIC.
+Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stack de **Python, SQL, Docker e Power BI**. O escopo cobre desde a auditoria da base de dados física (*raw signals*), validação da consistência estatística da operação normal, detecção de anomalias por modelos multivariados (SPC), até a modelagem dimensional de KPIs e o design de um plano de controle contínuo baseado em DMAIC.
 
 ---
 
@@ -24,6 +25,7 @@ Este repositório é um case de **Analytics Engineering & Industrial Data Scienc
 
 - **Python (Pandas, NumPy, Plotly):** Pipelines de ETL para conversão de grandes volumes de séries temporais (formato RData para Parquet), análise exploratória multivariada e modelagem SPC.
 - **SQL (DuckDB):** Modelagem e criação de views de KPIs analíticos para consumo no Power BI.
+- **Docker & Docker Compose:** Containerização do ambiente completo para execução isolada e reprodutibilidade com um único comando.
 - **Estatística Industrial:** Monitoramento multivariado via $T^2$ de Hotelling, resíduos $Q$ (SPE) e regras de persistência de alarme.
 - **Business Intelligence (Power BI & Power Query):** Modelagem dimensional star schema, desenvolvimento de medidas em DAX para acompanhamento de faturamento/alarme e design de interface executiva.
 
@@ -37,6 +39,7 @@ Este repositório é um case de **Analytics Engineering & Industrial Data Scienc
 | ETL e Engenharia de Parquet (Measure) | Completo |
 | Higienização e Auditoria de Qualidade | Completo |
 | Validação Estatística de Operação Estável | Completo |
+| Containerização com Docker & Docker Compose | Completo |
 | Modelagem de Controle Estatístico de Processo (SPC) | Planejado |
 | Ingestão e Injeção de Falhas | Planejado |
 | Comparação de Modelos de Detecção | Planejado |
@@ -102,7 +105,9 @@ chemical-process-performance-analytics/
 ├── scripts/                 # Scripts Python de download e pipelines
 ├── sql/                     # Banco DuckDB e views de KPIs
 ├── src/                     # Módulos Python reutilizáveis
-└── tests/                   # Testes unitários e de integridade
+├── tests/                   # Testes unitários e de integridade
+├── Dockerfile               # Imagem Docker para execução reprodutível
+└── docker-compose.yml       # Orquestração do pipeline analítico e Jupyter
 ```
 
 ## Roteiro de Análise (Notebook Roadmap)
@@ -114,28 +119,33 @@ chemical-process-performance-analytics/
 
 ## Como Reproduzir o Projeto
 
-### 1. Preparação do Ambiente
-Clone o repositório e instale as bibliotecas necessárias:
+### Opção A: Execução Containerizada com Docker (Recomendado)
+
+Construa a imagem e execute o pipeline de dados automaticamente:
+```bash
+# Gerar as tabelas dimensionais e métricas no container
+docker compose up analytics --build
+
+# Iniciar o ambiente JupyterLab containerizado (porta 8888)
+docker compose up jupyter
+```
+
+### Opção B: Execução Local (Python)
+
 ```bash
 git clone https://github.com/Nayanearaujo/chemical-process-performance-analytics.git
 cd chemical-process-performance-analytics
 pip install -r requirements.txt
-```
 
-### 2. Download do Dataset
-Execute o pipeline para baixar os arquivos do Tennessee Eastman diretamente do Harvard Dataverse:
-```bash
+# Download do dataset
 python scripts/download_data.py
-```
 
-### 3. Processamento do Baseline
-Rode o script de processamento dos dados estáveis para gerar a base de auditoria e os arquivos Parquet:
-```bash
+# Processamento do baseline
 python scripts/prepare_normal_baseline.py
 ```
 
 ## Ferramentas Utilizadas
-Python · Pandas · NumPy · Plotly · DuckDB · SQL · Parquet · Jupyter · Pytest · Power BI · GitHub
+Python · Pandas · NumPy · Plotly · DuckDB · SQL · Docker · Parquet · Jupyter · Pytest · Power BI · GitHub
 
 ## Fonte e Licença
 - **Dataset:** Tennessee Eastman Process Simulation Data (Harvard Dataverse, DOI: [10.7910/DVN/6C3JR1](https://doi.org/10.7910/DVN/6C3JR1)).
