@@ -15,18 +15,22 @@ Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stac
 
 ---
 
-### 📊 Dashboard Executivo Power BI & Aplicação Interativa Streamlit
+## 📊 Dashboards Executivos e Aplicação Interativa
 
-![Dashboard Executivo - Industrial Anomaly Analytics](images/powerbi_executive_overview.png)
+### 1. Painel Executivo Power BI (Visão Estratégica & Baseline)
+![Dashboard Executivo Power BI](images/powerbi_executive_overview.png)
 
-> **🚀 Experimente a Aplicação Interativa Web (Streamlit):**
-> O projeto inclui um web app completo (`app.py`) com explorador interativo de sensores, simulador multivariado de SPC ($T^2$ e $Q$) e injeção de falhas com regras de persistência.
+### 2. Aplicação Interativa Streamlit (Visão Operacional & Simulações)
+![Aplicação Interativa Streamlit](images/streamlit_app_preview.png)
+
+> **🚀 Experimente a Aplicação Interativa Web (`app.py`):**
+> O web app oferece exploração interativa dos 52 sinais de processo com gráficos Plotly, simulador multivariado de SPC ($T^2$ e $Q$), injeção de falhas com regra de persistência e dicionário completo de instrumentação.
 > ```bash
-> # Rodar o app interativo localmente
+> # Executar localmente
 > streamlit run app.py
 > 
-> # Ou iniciar via container Docker
-> docker compose up streamlit
+> # Ou executar 100% containerizado via Docker (porta 8501)
+> docker compose up streamlit --build
 > ```
 
 ---
