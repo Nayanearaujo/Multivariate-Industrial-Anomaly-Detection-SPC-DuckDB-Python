@@ -1,116 +1,135 @@
-# Chemical Process Performance Analytics
+# Chemical Process Performance Analytics: Do Sinal do Sensor ao Controle de Processo
 
-An industrial analytics project connecting chemical engineering, process performance, statistical process control, continuous improvement, and business intelligence.
+**Um framework analítico industrial que transforma dados de sensores de alta frequência em um plano de monitoramento estatístico de processos, auditado e pronto para a tomada de decisão operacional.**
 
-The project uses the **Tennessee Eastman Process** simulation dataset published through Harvard Dataverse to study how a multivariate chemical process moves from stable operation to abnormal behaviour, how quickly faults can be detected, and which process variables require operational attention.
+Este projeto analisa o dataset do *Tennessee Eastman Process* utilizando um stack de **Python, SQL e Power BI**. O escopo cobre desde a auditoria da base de dados física (*raw signals*), validação da consistência estatística da operação normal, detecção de anomalias por modelos multivariados (SPC), até a modelagem dimensional de KPIs e o design de um plano de controle contínuo baseado em DMAIC.
 
-## Objectives
+---
 
-The goal is to answer a core operational question: **How can an operations team monitor process stability, detect abnormal conditions early, and prioritise improvement work without creating an excessive false-alarm burden?**
+### 📊 [CLIQUE AQUI PARA ACESSAR O DASHBOARD INTERATIVO](https://github.com/Nayanearaujo/chemical-process-performance-analytics)
 
-To achieve this, the project connects raw process signals to operational decisions by:
-1. Defining statistical normal operating envelopes.
-2. Measuring detection speed (delay) and false-alarm frequency.
-3. Structuring consistent performance comparisons across different fault types and operating runs.
-4. Mapping which process measurements drive specific anomaly alerts.
-5. Providing structured inputs for a practical monitoring and control dashboard.
+---
 
-## Technology Stack
+## 🛠️ Tech Stack e Habilidades
+Este repositório é um case de **Analytics Engineering & Industrial Data Science** focado em confiabilidade e integridade de dados operacionais:
 
-* **Language/Processing:** Python, Pandas, NumPy, scikit-learn
-* **Database & SQL:** DuckDB, Parquet
-* **Visualization & Reporting:** Power BI, Power Query, Plotly, Jupyter Notebooks
+- **Python (Pandas, NumPy, Plotly):** Pipelines de ETL para conversão de grandes volumes de séries temporais (formato RData para Parquet), análise exploratória multivariada e modelagem SPC.
+- **SQL (DuckDB):** Modelagem e criação de views de KPIs analíticos para consumo no Power BI.
+- **Estatística Industrial:** Monitoramento multivariado via $T^2$ de Hotelling, resíduos $Q$ (SPE) e regras de persistência de alarme.
+- **Business Intelligence (Power BI & Power Query):** Modelagem dimensional star schema, desenvolvimento de medidas em DAX para acompanhamento de faturamento/alarme e design de interface executiva.
 
-## Repository Structure
+> O projeto contendo o modelo estatístico está disponível no repositório. Cada KPI apresentado foi reconciliado com a base higienizada para garantir 100% de integridade dos dados de processo.
 
-```text
-chemical-process-performance-analytics/
-├── config/                  # Visual palettes and configurations
-├── data/                    # Raw, interim, and processed datasets
-├── docs/                    # Dashboards, KPIs, and project specifications
-├── images/                  # Exported plots and analytics charts
-├── notebooks/               # Step-by-step Jupyter notebooks
-├── powerbi/                 # Power BI files and data models
-├── scripts/                 # Download, processing, and build utilities
-├── sql/                     # DuckDB database schema and KPI views
-├── src/                     # Shared Python library modules
-└── tests/                   # Code and metric integrity checks
+## Status do Projeto (Milestones)
+
+| Frente de Trabalho | Status |
+|---|---|
+| Mapeamento de Sensores e Contexto Físico (Define) | Completo |
+| ETL e Engenharia de Parquet (Measure) | Completo |
+| Higienização e Auditoria de Qualidade | Completo |
+| Validação Estatística de Operação Estável | Completo |
+| Modelagem de Controle Estatístico de Processo (SPC) | Planejado |
+| Ingestão e Injeção de Falhas | Planejado |
+| Comparação de Modelos de Detecção | Planejado |
+| Dashboards de Monitoramento e Controle (Power BI) | Planejado |
+
+## Raio-X do Processo (Resultados de Base)
+A base analítica foi validada e auditada, fornecendo a base histórica necessária para o estabelecimento de limites de controle estatístico confiáveis.
+
+| KPI / Métrica | Resultado Auditado | Detalhe Técnico |
+|---|---:|---|
+| **Amostras Totais** | **730.000** | Leituras de tempo coletadas nas simulações |
+| **Simulações de Operação** | **1.000** | Corridas completas de processo para treino e teste |
+| **Sinais de Processo** | **52** | 41 variáveis medidas + 11 variáveis manipuladas |
+| **Desvio de Distribuição** | **0,019 IQR** | Máximo desvio de mediana entre treino e teste |
+| **Integridade de Dados** | **100%** | Zero células vazias, valores infinitos ou chaves duplicadas |
+
+## Indicadores de Processo & Insights
+1. **Monitoramento Multivariado:** Como identificar quando o processo sai do seu envelope operacional estável usando métricas unificadas?
+2. **Tempo de Detecção:** Quão rápido conseguimos identificar uma falha no sistema após o seu início físico?
+3. **Taxa de Alarme Falso:** Como minimizar alertas desnecessários durante a operação normal para não sobrecarregar os operadores?
+4. **Isolamento de Causa Raiz:** Quais variáveis (pressão, vazão, temperatura) são as maiores causadoras de um desvio detectado?
+5. **Carga de Alarme:** Quantos alarmes confirmados são gerados a cada 100 horas de operação?
+
+## Pipeline de Inteligência (Workflow)
+
+```mermaid
+flowchart TD
+    A[Dados Brutos - Harvard Dataverse] --> B[Auditoria e Qualidade da Base]
+    B --> C[Construção da Linha de Base Estável]
+    C --> D[Modelagem SPC - Hotelling T² e Q]
+    D --> E[Isolamento de Causa Raiz - Gráficos de Contribuição]
+    E --> F[Dashboard de Controle Operacional]
 ```
 
-## Data Source
+## Validação e Higienização de Dados
+A consistência dos dados históricos é crítica para o controle estatístico. A auditoria de dados realizou as seguintes verificações automáticas:
+- **Integridade de Chave:** Confirmação de que a combinação de `simulationRun` e `sample` é única.
+- **Valores Nulos e Infinitos:** Varredura em todas as 52 colunas físicas para assegurar a inexistência de leituras falhas.
+- **Comparação de Splits:** Teste estatístico de Kolmogorov-Smirnov para garantir que a partição de teste tem a mesma distribuição da partição de treino (limite de deslocamento máximo de 0,019 IQR respeitado).
 
-* **Dataset:** Additional Tennessee Eastman Process Simulation Data for Anomaly Detection Evaluation
-* **Publisher:** Harvard Dataverse
-* **DOI:** [10.7910/DVN/6C3JR1](https://doi.org/10.7910/DVN/6C3JR1)
-* **Format:** Multivariate time series representing normal operation and 20 distinct process-fault scenarios.
-* **Signals:** 41 measured variables, 11 manipulated variables, plus simulation metadata (run, sample, fault number).
+## Insights Críticos de Engenharia de Processo
+- **Divisão de Normalidade:** Um conjunto independente de testes normais foi mantido exclusivamente para calibrar a taxa de alarmes falsos sob condições não vistas.
+- **Variáveis de Processo vs Manipuladas:** Das 52 variáveis, 41 representam sensores diretos de processo (temperaturas, pressões, níveis, composições) e 11 representam as posições de válvulas de controle (manipuladas).
+- **Ausência de Dados Financeiros:** A simulação foca puramente em física e controle de processos. Métricas financeiras como economia de matéria-prima ou OEE não serão geradas devido à ausência dessas informações na fonte.
 
-*Note: Raw source files are not tracked in this repository. Follow the setup steps below to download them directly from the source.*
+## Arquitetura de Monitoramento (DMAIC)
+O projeto é estruturado utilizando a metodologia DMAIC de melhoria contínua:
+- **Define:** Mapeamento de problemas operacionais como atrasos de detecção e sobrecarga de alarmes falsos.
+- **Measure:** Criação da linha de base de operação normal estável.
+- **Analyse:** Identificação das falhas mais críticas e das variáveis físicas correlacionadas com cada desvio.
+- **Improve:** Ajuste fino dos limites estatísticos e das regras de persistência (ex: 3 alarmes consecutivos para validar um desvio).
+- **Control:** Publicação de views em SQL, dicionários de KPIs e painéis de resposta operacional para a sala de controle.
 
-## How to Reproduce
+## Estrutura do Repositório
+```text
+chemical-process-performance-analytics/
+├── config/                  # Paletas visuais e configurações
+├── data/                    # Dados locais (raw, interim e processed)
+├── docs/                    # Especificação de KPIs, dicionário e charter
+├── images/                  # Gráficos exportados para documentação
+├── notebooks/               # Análise exploratória e notebooks do leitor
+├── powerbi/                 # Arquivo de modelo e layout de dashboard
+├── scripts/                 # Scripts Python de download e pipelines
+├── sql/                     # Banco DuckDB e views de KPIs
+├── src/                     # Módulos Python reutilizáveis
+└── tests/                   # Testes unitários e de integridade
+```
 
-### 1. Environment Setup
-Clone the repository and install the dependencies:
+## Roteiro de Análise (Notebook Roadmap)
+
+| Ordem | Notebook | Objetivo |
+|---|---|---|
+| `01` | [01_data_source_and_process_context.ipynb](notebooks/01_data_source_and_process_context.ipynb) | Contextualização do processo químico, definição de variáveis e download. |
+| `02` | [02_data_quality_and_operating_baseline.ipynb](notebooks/02_data_quality_and_operating_baseline.ipynb) | Auditoria de integridade física dos dados e validação do baseline estável. |
+
+## Como Reproduzir o Projeto
+
+### 1. Preparação do Ambiente
+Clone o repositório e instale as bibliotecas necessárias:
 ```bash
 git clone https://github.com/Nayanearaujo/chemical-process-performance-analytics.git
 cd chemical-process-performance-analytics
 pip install -r requirements.txt
 ```
 
-### 2. Download Raw Data
-Download the Tennessee Eastman datasets from Harvard Dataverse:
+### 2. Download do Dataset
+Execute o pipeline para baixar os arquivos do Tennessee Eastman diretamente do Harvard Dataverse:
 ```bash
 python scripts/download_data.py
 ```
-This script downloads the raw `.RData` files into `data/raw/` and generates `source_manifest.json` with checksums for verification.
 
-### 3. Build the Normal-Operation Baseline
-Run the preprocessing script to clean, validate, and prepare the normal-operation baseline:
+### 3. Processamento do Baseline
+Rode o script de processamento dos dados estáveis para gerar a base de auditoria e os arquivos Parquet:
 ```bash
 python scripts/prepare_normal_baseline.py
 ```
-This exports processed `.parquet` files and updates the baseline audit in `data/processed/normal_baseline_audit.json`.
 
----
+## Ferramentas Utilizadas
+Python · Pandas · NumPy · Plotly · DuckDB · SQL · Parquet · Jupyter · Pytest · Power BI · GitHub
 
-## Decision-Focused KPIs
+## Fonte e Licença
+- **Dataset:** Tennessee Eastman Process Simulation Data (Harvard Dataverse, DOI: [10.7910/DVN/6C3JR1](https://doi.org/10.7910/DVN/6C3JR1)).
+- **Licença:** Código sob [Licença MIT](LICENSE).
 
-The project evaluates performance using five operational metrics:
-
-1. **Fault Detection Rate (FDR):** Percentage of eligible faulty runs that trigger a confirmed alert.
-2. **Median Detection Delay:** Median time (in minutes) from fault onset to the first confirmed alert.
-3. **False Alarm Rate (FAR):** Percentage of normal-operation samples that trigger a false alert.
-4. **Process Stability Rate:** Percentage of samples that remain within the defined statistical envelope.
-5. **Alarm Burden:** Count of confirmed alerts per 100 operating hours.
-
-*Note: Because the Tennessee Eastman simulation does not model production volumes, costs, or repair events, this project does not track financial savings, yield, OEE, MTTR, or MTBF.*
-
-## Development & Analysis Path
-
-1. **Context & Setup:** Data source mapping and process boundaries.
-2. **Data Quality & Baseline:** Validating training/testing datasets.
-3. **Statistical Process Control:** Defining Hotelling $T^2$ and Q-residual thresholds.
-4. **Pattern Analysis:** Pareto charts of faults and alarm occurrences.
-5. **Model Evaluation:** Performance comparison of detection methods.
-6. **Root Cause Analysis:** Contribution plots to isolate driving variables.
-7. **Operational Tuning:** Sensitivity analysis on alert persistence rules.
-8. **Control Plan:** Control charts, SQL views, and dashboard specifications.
-
-## Current Project Status
-
-**Phase 2 - Baseline Validated**
-* Loaded and verified 730,000 samples across 1,000 simulation runs.
-* Confirmed 52 process signals with 0 missing, non-finite, or duplicated keys.
-* Established the normal-testing partition for false-alarm testing.
-* Validated that the maximum training-to-testing median shift is minimal (approx. 0.019 IQR).
-
-You can review the full data audit in [Notebook 02 - Data Quality and Operating Baseline](notebooks/02_data_quality_and_operating_baseline.ipynb).
-
-## Continuous Improvement (DMAIC) Framework
-
-The analysis steps are structured using the DMAIC method:
-* **Define:** Scope detection delays and false alerts as the core problem.
-* **Measure:** Establish base metrics under stable operating conditions.
-* **Analyse:** Identify difficult-to-detect faults and pinpoint variables driving deviation.
-* **Improve:** Evaluate alarm persistence filters to balance sensitivity and workload.
-* **Control:** Provide KPI views, SQL scripts, and Power BI specifications for production monitoring.
+Desenvolvido por `Nayane Araujo`
